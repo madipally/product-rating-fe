@@ -1,0 +1,28 @@
+<table align='center' border='1' cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<% @products.each do |product| %>
+    <td style='border:none;'>
+        <div class="product-container">
+            <%= image_tag "#{product['id']}.jpg" %>
+            <h3 class="product-name"><%= product['name'] %></h3>
+            <h3 class="product-description"><%= product['description'] %></h3>
+            <h3 class="product-price"><%= number_to_currency(product['price']) %></h3>
+            <% average_rating = product["average_rating"].to_f.round %>
+            <div class="product-rating">
+              <% average_rating.times do %>
+                <%= image_tag("star-fill.svg", alt: "Star") %>
+              <% end %>
+
+              <% (5 - average_rating).times do %>
+                <%= image_tag("star.svg", alt: "Star") %>
+              <% end %>
+           </div>
+           <button class="button modal-link" role="button" data-id = <%= product['id'] %>>Add Review</button>
+        </div>
+    </td>
+<% end %>
+</tr> 
+</tbody>
+</table>
+<%= render partial: 'model_window' %>
