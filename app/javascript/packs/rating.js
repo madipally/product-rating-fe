@@ -14,7 +14,7 @@
     });
     closeButton.addEventListener("click", function(event) {
       modal.style.display = "none";
-      parent.location.reload();
+      $("#rating-alert").html("");
     });
   });
 
@@ -39,8 +39,6 @@
                     form[0].reset();
                 },
                 error: function() {
-                    alert("in eroor")
-                    alert(error)
                     $("#rating-alert").html("Error submitting rating: " + error);
                 }
             });
