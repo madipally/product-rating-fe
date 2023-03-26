@@ -23,23 +23,29 @@
       var form = $(this);
       var product_id = $('#product_id').val();
       var stars = $("input[type='radio'][name='stars']:checked").val();
+      var name = $('#name').val();
+      var comment = $('#comment').val();
       if (typeof stars === 'undefined') {
         $("#rating-alert").html("Please provide rating!")
+        $('.button').removeAttr('data-disable-with');
       }
       else {
             $.ajax({
                 url: form.attr("action"),
                 type: form.attr("method"),
-                data: {"rating": { product_id: product_id, stars: stars } },
+                data: {"rating": { product_id: product_id, name: name, stars: stars, comments: comment } },
                 success: function(response) {
                     $("#rating-alert").html("Rating submitted successfully");
                     form[0].reset();
                 },
-                error: function(xhr, status, error) {
+                error: function() {
+                    alert("in eroor")
+                    alert(error)
                     $("#rating-alert").html("Error submitting rating: " + error);
                 }
             });
-            alert("Rating submitted successfully")
+            alert("Rating submitted successfully");
+            $("#rating-alert").html("Rating submitted successfully");
             const modal = document.querySelector("#modal");
             modal.style.display = "none";
             parent.location.reload();
